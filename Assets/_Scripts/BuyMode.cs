@@ -4,7 +4,9 @@ using System.Collections;
 public class BuyMode : MonoBehaviour {
 	public LayerMask Grid;
 
-
+	GameObject currentGrid;
+	Color Hover = new Color(1f,0f,0f);
+	Color Old = new Color (1f, 1f, 1f);
 	// Use this for initialization
 	void Start ()
 	{
@@ -18,23 +20,38 @@ public class BuyMode : MonoBehaviour {
 			return;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if(Physics.Raycast(ray, out hit, 100, Grid) && Input.GetMouseButtonDown(0))
+		if(Physics.Raycast(ray, out hit, 100, Grid))
 		{
-			//Debug.Log("TIME TO BUY");
-			//BUY THINGS.
-			GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			cube.transform.position = hit.collider.gameObject.transform.position;
+			if(currentGrid)
+				ChangeColor(currentGrid,Old);
+			currentGrid = hit.collider.gameObject;
+			ChangeColor(currentGrid,Hover);
+			if(Input.GetMouseButtonDown(0))
+			{
+				//BUY OPERATIONS
+				ChangeColor(currentGrid,Old);
+			}
 
-		}
-		else if(Physics.Raycast(ray,out hit, 100, Grid) && !Input.GetMouseButtonDown(0))
-		{
-			//Debug.Log("HOVER");
-			//hover
 		}
 		else
 		{
-			//Debug.Log("DIDN'T HIT A GRID");
-			//didn't hit anything
+			if(currentGrid)
+				ChangeColor(currentGrid, Old);
+			currentGrid = null;
 		}
+	}
+
+	void ChangeColor(GameObject cur, Color col)
+	{
+		Mesh curMesh = cur.GetComponent<MeshFilter> ().mesh;
+		if(curMesh.colors.Length == 0 || curMesh.colors[0] != col)
+		{
+			Vector3 [] vertices = curMesh.vertices;
+			Color [] colors = new Color[vertices.Length];
+			for(int i = 0; i < vertices.Length; i++)
+				colors[i] = col;
+			curMesh.colors = colors;
+		}
+
 	}
 }

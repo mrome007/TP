@@ -13,7 +13,7 @@ public class Manager : MonoBehaviour
 
 	void OnGUI()
 	{
-		if(GUI.Button(new Rect(0.85f * Screen.width,0f,200f,200f),"CHANGE MODE"))
+		if(GUI.Button(new Rect(0.79125f * Screen.width,0f,200f,200f),"CHANGE MODE"))
 		{
 			SM.ChangeMode();
 			Debug.Log(SingletonForMode.Play_Mode);

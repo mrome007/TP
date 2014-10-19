@@ -13,7 +13,7 @@ public class SingletonForMode
 	private static SingletonForMode instance = null;
 	private SingletonForMode()
 	{
-		Play_Mode = PlayMode.SHOOTmode;
+		Play_Mode = PlayMode.BUYmode;
 	}
 
 	public static SingletonForMode GetInstance()
