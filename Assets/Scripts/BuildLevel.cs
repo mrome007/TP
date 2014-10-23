@@ -51,7 +51,7 @@ public class BuildLevel : MonoBehaviour {
 					}
 					pos += new Vector3(GridNext,0f,0f);
 				}
-				StartPoint.position += new Vector3(0f,0f,GridNext);
+				StartPoint.position -= new Vector3(0f,0f,GridNext);
 			}
 			return true;
 		}
