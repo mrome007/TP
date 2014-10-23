@@ -4,11 +4,11 @@ using System.Collections;
 public class Manager : MonoBehaviour
 {
 	//instance of the singleton.
-	private SingletonForMode SM;
+	private SingletonManager SM;
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
-		SM = SingletonForMode.GetInstance ();
+		SM = SingletonManager.GetInstance ();
 	}
 
 	void OnGUI()
@@ -16,7 +16,7 @@ public class Manager : MonoBehaviour
 		if(GUI.Button(new Rect(0.79125f * Screen.width,0f,200f,200f),"CHANGE MODE"))
 		{
 			SM.ChangeMode();
-			Debug.Log(SingletonForMode.Play_Mode);
+			Debug.Log(SingletonManager.Play_Mode);
 		}
 
 	}

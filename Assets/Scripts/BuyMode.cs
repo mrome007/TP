@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BuyMode : MonoBehaviour {
@@ -16,7 +16,7 @@ public class BuyMode : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(SingletonForMode.Play_Mode != SingletonForMode.PlayMode.BUYmode)
+		if(SingletonManager.Play_Mode != SingletonManager.PlayMode.BUYmode)
 			return;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
@@ -43,7 +43,8 @@ public class BuyMode : MonoBehaviour {
 
 	void ChangeColor(GameObject cur, Color col)
 	{
-		Mesh curMesh = cur.GetComponent<MeshFilter> ().mesh;
+		Transform c = cur.transform.GetChild (0);
+		Mesh curMesh = c.gameObject.GetComponent<MeshFilter> ().mesh;
 		if(curMesh.colors.Length == 0 || curMesh.colors[0] != col)
 		{
 			Vector3 [] vertices = curMesh.vertices;
@@ -52,6 +53,5 @@ public class BuyMode : MonoBehaviour {
 				colors[i] = col;
 			curMesh.colors = colors;
 		}
-
 	}
 }
