@@ -1,5 +1,4 @@
-﻿/* MAKE GRID FOR UNITS
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -28,10 +27,10 @@ public class BinaryHeap {
 		for(tmp = hp[hole]; hole * 2 <= sz; hole = child)
 		{
 			child = hole * 2;
-			if(child != sz && hp[child+1].GetComponent<GridForUnits>().distance < 
-			   hp[child].GetComponent<GridForUnits>().distance)
+			if(child != sz && hp[child+1].GetComponent<Grid>().distance < 
+			   hp[child].GetComponent<Grid>().distance)
 				child++;
-			if(hp[child].GetComponent<GridForUnits>().distance < tmp.GetComponent<GridForUnits>().distance)
+			if(hp[child].GetComponent<Grid>().distance < tmp.GetComponent<Grid>().distance)
 				hp[hole] = hp[child];
 			else
 				break;
@@ -70,8 +69,8 @@ public class BinaryHeap {
 		{
 			if(elem && hp[hole/2])
 			{
-				if(hole > 1 && elem.GetComponent<GridForUnits>().distance < 
-				   hp[hole/2].GetComponent<GridForUnits>().distance)
+				if(hole > 1 && elem.GetComponent<Grid>().distance < 
+				   hp[hole/2].GetComponent<Grid>().distance)
 				{
 					hp[hole] = hp[hole/2];
 					hole /= 2;
@@ -88,4 +87,3 @@ public class BinaryHeap {
 		hp[hole] = elem;
 	}
 }
-*/

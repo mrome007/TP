@@ -25,6 +25,7 @@ public class BuyMode : MonoBehaviour {
 			if(currentGrid)
 				ChangeColor(currentGrid,Old);
 			currentGrid = hit.collider.gameObject;
+			Debug.Log(currentGrid.name);
 			ChangeColor(currentGrid,Hover);
 			if(Input.GetMouseButtonDown(0))
 			{
