@@ -16,7 +16,7 @@ public class Manager : MonoBehaviour
 		if(GUI.Button(new Rect(0.79125f * Screen.width,0f,200f,200f),"CHANGE MODE"))
 		{
 			SM.ChangeMode();
-			Debug.Log(SingletonManager.Play_Mode);
+			//Debug.Log(SingletonManager.Play_Mode);
 		}
 
 	}

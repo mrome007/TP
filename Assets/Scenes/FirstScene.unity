@@ -276,6 +276,8 @@ MonoBehaviour:
   Grid:
     serializedVersion: 2
     m_Bits: 256
+  testEnemy: {fileID: 100000, guid: 97c31593a1aed2144aca4936778bce57, type: 2}
+  ThePath: []
 --- !u!1 &2140470343
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,5 +329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a29aaeed74068419423f081541c185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testEnemy: {fileID: 100000, guid: 97c31593a1aed2144aca4936778bce57, type: 2}
   Grid: {fileID: 100000, guid: c3dfbbe42d8dac44c9a4a62cab1af503, type: 2}
   StartPoint: {fileID: 2140470345}

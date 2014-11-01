@@ -28,10 +28,20 @@ public class BuildLevel : MonoBehaviour {
 		ReadLevel (LevelPath + SingletonManager.Levels[SingletonManager.CurLevelIndex]);
 		ConnectLevel ();
 		ThePath = new List<Transform> ();
-		ThePath = FindPathStartToEnd (StartGrid);
-		Debug.Log (ThePath.Count);
+		//FindPathStartToEnd (StartGrid,EndGrid,TheLevel,ref ThePath);
+		//BuyMode.Dijkstra (StartGrid, EndGrid, TheLevel, ref ThePath);
+		//Debug.Log (ThePath.Count);
+		BuyMode.StartGrid = StartGrid;
+		BuyMode.EndGrid = EndGrid;
+		BuyMode.TheLevel = TheLevel;
+		Camera.main.GetComponent<BuyMode> ().Dijkstra (StartGrid, EndGrid, TheLevel,ref ThePath);
 		GameObject t = (GameObject)Instantiate (testEnemy, StartGrid.transform.position, Quaternion.identity);
 		t.GetComponent<testEnemyPath> ().MyPath = ThePath;
+		t.GetComponent<testEnemyPath> ().StartGrid = StartGrid;
+		t.GetComponent<testEnemyPath> ().EndGrid = EndGrid;
+		t.GetComponent<testEnemyPath>().TheLevel = TheLevel;
+		//StartCoroutine (Camera.main.GetComponent<BuyMode>().Dijkstra (StartGrid, EndGrid, TheLevel, Camera.main.GetComponent<BuyMode>().SetPath));
+		Debug.Log (Camera.main.GetComponent<BuyMode> ().ThePath.Count + "*******");
 	}
 	
 	// Update is called once per frame
@@ -144,67 +154,5 @@ public class BuildLevel : MonoBehaviour {
 			}
 		}
 	}
-
-
-	public List<Transform> FindPathStartToEnd(GameObject start)
-	{
-		List<Transform> currPath = new List<Transform> ();
-		BinaryHeap bhp = new BinaryHeap (200);
-		for(int i = 0; i < TheLevel.Length; i++)
-		{
-			for(int j = 0; j < TheLevel.Length; j++)
-			{
-				if(TheLevel[i][j].tag != "Taken")
-				{
-					Grid cur = TheLevel[i][j].GetComponent<Grid>();
-					if(cur)
-					{
-						cur.distance = 10000;
-						cur.hasBeenVisited = false;
-					}
-				}
-			}
-		}
-
-		Grid s = start.GetComponent<Grid> ();
-		s.distance = 0;
-		s.hasBeenVisited = true;
-		bhp.add (start);
-
-		while(!bhp.empty())
-		{
-			GameObject min = bhp.extractMin();
-			Grid curmin = min.GetComponent<Grid>();
-			curmin.hasBeenVisited = true;
-			for(int i = 0; i < curmin.nextTo.Length; i++)
-			{
-				int currentDist = curmin.distance;
-				if(curmin.isAvailable)
-				{
-					Grid nodesToVisit = curmin.nextTo[i].GetComponent<Grid>();
-					int oldDis = nodesToVisit.distance;
-					int newDis = currentDist + 1;
-					if(newDis < oldDis)
-					{
-						nodesToVisit.distance = newDis;
-						nodesToVisit.previous = min;
-						bhp.add(curmin.nextTo[i]);
-					}
-				}
-			}
-		}
-
-		GameObject theend = EndGrid;
-		Grid checkEnd;// = theend.GetComponent<Grid> ();
-		while(theend.name != start.name)
-		{
-			currPath.Add(theend.transform);
-			checkEnd = theend.GetComponent<Grid>();
-			theend = checkEnd.previous;
-		}
-		currPath.Add (theend.transform);
-		return currPath;
-	}
-
-
+	
 }
