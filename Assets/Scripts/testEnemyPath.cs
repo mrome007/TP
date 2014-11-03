@@ -15,11 +15,12 @@ public class testEnemyPath : MonoBehaviour {
 	{
 		MyPath = np;
 	}
+	private float OSpeed;
 	// Use this for initialization
 	void Start () 
 	{
 		CurrentIndex = MyPath.Count-1;
-		Speed = 2.0f;
+		OSpeed = Speed;
 	}
 	
 	// Update is called once per frame
@@ -49,6 +50,6 @@ public class testEnemyPath : MonoBehaviour {
 		CurrentIndex = MyPath.Count-1;
 		Speed = 0.0f;
 		yield return new WaitForSeconds(0.5f);
-		Speed = 2.0f;
+		Speed = OSpeed;
 	}
 }

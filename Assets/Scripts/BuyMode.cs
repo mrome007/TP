@@ -36,7 +36,7 @@ public class BuyMode : MonoBehaviour {
 			return;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if(Physics.Raycast(ray, out hit, 100, Grid))
+		if(Physics.Raycast(ray, out hit, 150, Grid))
 		{
 			if(currentGrid)
 				ChangeColor(currentGrid,Old);
@@ -53,7 +53,10 @@ public class BuyMode : MonoBehaviour {
 				hit.collider.gameObject.GetComponent<Grid>().isAvailable = false;
 
 				if(Dijkstra(StartGrid,EndGrid,TheLevel,ref ThePath))
+				{
 					HasLevelChanged = LevelChange.CHANGED;
+					BuildLevel.ThePath = ThePath;
+				}
 				else
 				{
 					hit.collider.gameObject.tag = "NotTaken";

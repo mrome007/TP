@@ -246,7 +246,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1977216914}
   m_LocalRotation: {x: .382683486, y: 0, z: 0, w: .923879564}
-  m_LocalPosition: {x: 35, y: 35, z: -65}
+  m_LocalPosition: {x: 70, y: 80, z: -120}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -331,5 +331,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testEnemy: {fileID: 100000, guid: 97c31593a1aed2144aca4936778bce57, type: 2}
+  EnemyNormal: {fileID: 100002, guid: 7c67505428a406349b6c6e03e861a4b0, type: 2}
+  EnemySlow: {fileID: 100000, guid: ab29eed7b2767a647aaff0a6a5d096e4, type: 2}
+  EnemyFast: {fileID: 100000, guid: d92ac836c4e1b344d9fa360879670132, type: 2}
   Grid: {fileID: 100000, guid: c3dfbbe42d8dac44c9a4a62cab1af503, type: 2}
   StartPoint: {fileID: 2140470345}
+  GameMode: 1

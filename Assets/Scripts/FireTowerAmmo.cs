@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FireTowerAmmo : MonoBehaviour 
 {
-	public const float ACCEL_GRAVITY = -0.02f;
+	public const float ACCEL_GRAVITY = -0.015f;
 	public Vector3 dir;
 	public float mAmmoSpeed;
 	public float mAngle;

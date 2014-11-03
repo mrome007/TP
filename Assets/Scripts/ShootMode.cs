@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ShootMode : MonoBehaviour {
 	public GameObject TowerAmmo;
-	private Vector3 AmmoSpawn = new Vector3(0f,5.0f,-25f);
+	private Vector3 AmmoSpawn = new Vector3(0f,10.0f,-25f);
 
 	private const float MAX_FIRE_ANGLE = Mathf.PI / 2.0f;
 	private float mClick;

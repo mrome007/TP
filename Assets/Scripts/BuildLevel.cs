@@ -8,15 +8,29 @@ using System.IO;
 
 public class BuildLevel : MonoBehaviour {
 	public GameObject testEnemy; //just to test the path.
+
+	public GameObject EnemyNormal;
+	public GameObject EnemySlow;
+	public GameObject EnemyFast;
+
+
 	public GameObject Grid;
 	public Transform StartPoint;
 
+	public enum SpawnMode
+	{
+		ENDLESS,
+		NOTENDLESS
+	}
+	public SpawnMode GameMode;
+
 	private string LevelPath = "Levels/";
+	private string PatternPath = "Patterns/";
 	private GameObject GridParent;
 	private GameObject StartGrid;
 	private GameObject EndGrid;
 	private GameObject[][] TheLevel;
-	private List<Transform> ThePath;
+	public static List<Transform> ThePath;
 
 	private float GridNext;
 	// Use this for initialization
@@ -41,7 +55,7 @@ public class BuildLevel : MonoBehaviour {
 		t.GetComponent<testEnemyPath> ().EndGrid = EndGrid;
 		t.GetComponent<testEnemyPath>().TheLevel = TheLevel;
 		//StartCoroutine (Camera.main.GetComponent<BuyMode>().Dijkstra (StartGrid, EndGrid, TheLevel, Camera.main.GetComponent<BuyMode>().SetPath));
-		Debug.Log (Camera.main.GetComponent<BuyMode> ().ThePath.Count + "*******");
+		StartCoroutine (SpawnLevel ("PatternTest"));
 	}
 	
 	// Update is called once per frame
@@ -154,5 +168,65 @@ public class BuildLevel : MonoBehaviour {
 			}
 		}
 	}
-	
+
+
+	bool SpawnPatterns(string filename, ref string [] pattern)
+	{
+		try
+		{
+			TextAsset readtext = Resources.Load(filename) as TextAsset;
+			pattern = readtext.text.Split("\n"[0]);
+			return true;
+		}
+		catch(Exception e)
+		{
+			print(e.Message);
+			return false;
+		}
+	}
+
+	IEnumerator SpawnLevel(string filename)
+	{
+		string [] lines = new string[0];
+		SpawnPatterns(PatternPath+filename, ref lines);
+		for(int i = 0; i < lines.Length; i++)
+		{
+			Debug.Log(lines[i]);
+			StartCoroutine(SpawnTypes(lines[i],3.0f));
+			yield return new WaitForSeconds(30.0f);
+		}
+	}
+
+	IEnumerator SpawnTypes(string patt, float timeBetweenTypes)
+	{
+		for(int i = 0; i < patt.Length; i++)
+		{
+			switch(patt[i])
+			{
+			case '1':
+				StartCoroutine(SpawnIndividuals(EnemyNormal,3,2.0f));
+				break;
+
+			case '2':
+				StartCoroutine(SpawnIndividuals(EnemyFast,2,2.0f));
+				break;
+			default:
+				break;
+			}
+			yield return new WaitForSeconds(timeBetweenTypes);
+		}
+	}
+
+	IEnumerator SpawnIndividuals(GameObject enemyType,int number, float timeBetweenIndividuals)
+	{
+		for(int i = 0; i < number; i++)
+		{
+			GameObject enem = (GameObject)Instantiate(enemyType,StartGrid.transform.position,Quaternion.identity);
+			enem.GetComponent<testEnemyPath> ().MyPath = ThePath;
+			enem.GetComponent<testEnemyPath> ().StartGrid = StartGrid;
+			enem.GetComponent<testEnemyPath> ().EndGrid = EndGrid;
+			enem.GetComponent<testEnemyPath>().TheLevel = TheLevel;
+			yield return new WaitForSeconds(timeBetweenIndividuals);
+		}
+	}
 }
