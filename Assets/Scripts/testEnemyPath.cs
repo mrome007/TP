@@ -36,9 +36,12 @@ public class testEnemyPath : MonoBehaviour {
 		   CurrentIndex--;
 		if(CurrentIndex < 0)
 		{
+			BuildLevel.NumEnemies--;
 			Destroy(gameObject);
 			return;
 		}
+		else if(CurrentIndex < 0)
+			return;
 		gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,MyPath[CurrentIndex].position, 
 		                                                    Speed * Time.deltaTime);
 
