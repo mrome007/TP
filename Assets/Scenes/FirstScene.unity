@@ -277,6 +277,9 @@ MonoBehaviour:
   Grid:
     serializedVersion: 2
     m_Bits: 256
+  TW:
+    serializedVersion: 2
+    m_Bits: 512
   testEnemy: {fileID: 100000, guid: 97c31593a1aed2144aca4936778bce57, type: 2}
   ThePath: []
 --- !u!1 &2140470343

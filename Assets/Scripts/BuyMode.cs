@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 public class BuyMode : MonoBehaviour {
 	public LayerMask Grid;
+	public LayerMask TW; //temporary
 	public GameObject testEnemy;
 
 	public enum LevelChange
@@ -36,7 +37,7 @@ public class BuyMode : MonoBehaviour {
 			return;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if(Physics.Raycast(ray, out hit, 150, Grid))
+		if(Physics.Raycast(ray, out hit, 200, Grid))
 		{
 			if(currentGrid)
 				ChangeColor(currentGrid,Old);
@@ -63,6 +64,7 @@ public class BuyMode : MonoBehaviour {
 					hit.collider.gameObject.GetComponent<Grid>().isAvailable = true;
 				}
 				ChangeColor(currentGrid,Old);
+				//call BuyIt here.
 			}
 
 		}
@@ -73,6 +75,19 @@ public class BuyMode : MonoBehaviour {
 			currentGrid = null;
 		}
 	}
+
+	//method to buy weapons
+	void BuyIt(GameObject tweapon, Vector3 pos)
+	{
+		TowerWeapons tws = tweapon.GetComponent<TowerWeapons> ();
+		int tcost = tws.Cost;
+		if((SingletonManager.Resources - tcost) >= 0)
+		{
+			Debug.Log("Bought It");
+			//Instantiate tweapon at position pos.
+		}
+	}
+
 
 	void ChangeColor(GameObject cur, Color col)
 	{

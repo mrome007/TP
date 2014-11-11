@@ -19,7 +19,7 @@ public class SingletonManager
 	public static string[] Levels;
 	public static int CurLevelIndex = 0;
 	public static string LevelName = "";
-
+	public static int Resources = 500;
 	private SingletonManager()
 	{
 		Play_Mode = PlayMode.BUYmode;
@@ -43,5 +43,11 @@ public class SingletonManager
 			Play_Mode = PlayMode.SHOOTmode;
 		else
 			Play_Mode = PlayMode.BUYmode;
+	}
+
+	public void ResetValues()
+	{
+		CurLevelIndex = 0;
+		Resources = 500;
 	}
 }
