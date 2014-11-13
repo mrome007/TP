@@ -20,6 +20,7 @@ public class SingletonManager
 	public static int CurLevelIndex = 0;
 	public static string LevelName = "";
 	public static int Resources = 500;
+	public static int WaveNumber = 0;
 	private SingletonManager()
 	{
 		Play_Mode = PlayMode.BUYmode;
@@ -28,6 +29,7 @@ public class SingletonManager
 		NumberOfLevels = Levels.Length;
 		CurLevelIndex = 0;
 		LevelName = Levels [CurLevelIndex];
+		WaveNumber = 1;
 	}
 
 	public static SingletonManager GetInstance()
@@ -49,5 +51,6 @@ public class SingletonManager
 	{
 		CurLevelIndex = 0;
 		Resources = 500;
+		WaveNumber = 1;
 	}
 }
